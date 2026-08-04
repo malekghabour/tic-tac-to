@@ -1,0 +1,16 @@
+<h1>Tic Tac Toe</h1>
+
+<div style="display:grid;grid-template-columns:repeat(3,100px);gap:5px;">
+  <% @board.each_with_index do |cell, i| %>
+    <%= button_to cell.presence || "-", games_move_path(index: i), method: :post, style: "height:100px;width:100px;" %>
+  <% end %>
+</div>
+
+<% if @winner %>
+  <h2>Winner: <%= @winner %></h2>
+<% elsif @board.none?(&:blank?) %>
+  <h2>It's a draw!</h2>
+<% end %>
+
+<%= button_to "Reset Game", games_reset_path, method: :post %>
+
